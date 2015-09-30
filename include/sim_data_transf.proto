@@ -1,0 +1,15 @@
+package data_transf;
+
+message Data_dump {
+  repeated Oscillator oscillator = 1;
+  repeated Saddle_t_and_id saddle_t_and_id = 2;
+}
+
+message Oscillator {
+  repeated double reset_t = 1 [packed=true];
+}
+
+message Saddle_t_and_id {
+  optional string saddle_id = 1;
+  optional double saddle_t = 2;
+}
