@@ -1,0 +1,264 @@
+\hypertarget{classLifNetSim}{\section{Lif\-Net\-Sim Class Reference}
+\label{classLifNetSim}\index{Lif\-Net\-Sim@{Lif\-Net\-Sim}}
+}
+
+
+Class implementing the network event based simulator.  
+
+
+
+
+{\ttfamily \#include $<$lifnetsim.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLifNetSim_a41b742a3933ce40ff395b8b91a4eac42}{set\-\_\-init\-\_\-cond} (std\-::vector$<$ double $>$ init\-\_\-volts, std\-::vector$<$ double $>$ pulses, std\-::vector$<$ double $>$ init\-\_\-deltas)
+\item 
+void \hyperlink{classLifNetSim_ab865fbba5713c71f09401543fb957d0f}{run} (std\-::string limit\-\_\-run, long unsigned limit)
+\begin{DoxyCompactList}\small\item\em Runs the simulation given a trial\-\_\-time or n\-\_\-resets (not both, error is given). \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_ac117f1711884c51a9c0ab388c9af5081}{void \hyperlink{classLifNetSim_ac117f1711884c51a9c0ab388c9af5081}{nearest\-\_\-reset\-\_\-t} (std\-::vector$<$ int $>$ \&, double \&)}\label{classLifNetSim_ac117f1711884c51a9c0ab388c9af5081}
+
+\begin{DoxyCompactList}\small\item\em Finds the nearest reset time from the oscillators. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a3add5023d4a28ebed0c9d72001963031}{void \hyperlink{classLifNetSim_a3add5023d4a28ebed0c9d72001963031}{receive\-\_\-net\-\_\-pulses} (bool $\ast$who\-\_\-received)}\label{classLifNetSim_a3add5023d4a28ebed0c9d72001963031}
+
+\begin{DoxyCompactList}\small\item\em Adds incoming pulses from network neurons. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_aab4f20795feda272fe6cbe07643006df}{void \hyperlink{classLifNetSim_aab4f20795feda272fe6cbe07643006df}{update\-\_\-net\-\_\-pulses\-\_\-timings} ()}\label{classLifNetSim_aab4f20795feda272fe6cbe07643006df}
+
+\begin{DoxyCompactList}\small\item\em Updates timings of pulses from network. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a4ce036135cee1e508dee8856d9583ec6}{double \hyperlink{classLifNetSim_a4ce036135cee1e508dee8856d9583ec6}{generate\-\_\-ext\-\_\-pulse\-\_\-t} ()}\label{classLifNetSim_a4ce036135cee1e508dee8856d9583ec6}
+
+\begin{DoxyCompactList}\small\item\em Randomly generates new noise pulses. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a76acb81ebca24fa243d745eba42018f0}{void \hyperlink{classLifNetSim_a76acb81ebca24fa243d745eba42018f0}{receive\-\_\-ext\-\_\-pulses} ()}\label{classLifNetSim_a76acb81ebca24fa243d745eba42018f0}
+
+\begin{DoxyCompactList}\small\item\em Adds incoming pulses from the outside. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_aea0ef0f42f7b2812dc870a19ce55f3b9}{void \hyperlink{classLifNetSim_aea0ef0f42f7b2812dc870a19ce55f3b9}{update\-\_\-ext\-\_\-pulses\-\_\-timings} ()}\label{classLifNetSim_aea0ef0f42f7b2812dc870a19ce55f3b9}
+
+\begin{DoxyCompactList}\small\item\em Updates timings of pulses outside network (noise) \end{DoxyCompactList}\item 
+void \hyperlink{classLifNetSim_ace0373bc7bd9c4ce2ecb9c8464a32eb6}{save\-\_\-saddle\-\_\-t\-\_\-and\-\_\-id} ()
+\item 
+void \hyperlink{classLifNetSim_a53ec98926ef6138230f0e2f5cecba444}{save\-\_\-reset\-\_\-timing} (int osc)
+\item 
+\hypertarget{classLifNetSim_ad904082e4da0319cc30428b7e5f48a99}{void \hyperlink{classLifNetSim_ad904082e4da0319cc30428b7e5f48a99}{save\-\_\-data} (std\-::string file\-\_\-name)}\label{classLifNetSim_ad904082e4da0319cc30428b7e5f48a99}
+
+\begin{DoxyCompactList}\small\item\em Save simulation data to file. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a1e8bbb31039d847ae29dbdc248cc0b10}{void \hyperlink{classLifNetSim_a1e8bbb31039d847ae29dbdc248cc0b10}{check\-\_\-saddle} ()}\label{classLifNetSim_a1e8bbb31039d847ae29dbdc248cc0b10}
+
+\begin{DoxyCompactList}\small\item\em Updates saddle D\-F\-A and checks if saddle has been reached. \end{DoxyCompactList}\item 
+void \hyperlink{classLifNetSim_a6ec30e0006b7e3cac12299061f86916f}{set\-\_\-noise} (double \hyperlink{classLifNetSim_aa4075d2e5e5432a5e058c4fd7997bbea}{noise\-\_\-rate}, double noise\-\_\-amplitude\-\_\-squared)
+\item 
+\hypertarget{classLifNetSim_a7a3e379a13b36caa6de19cb4aeb7ea5c}{void \hyperlink{classLifNetSim_a7a3e379a13b36caa6de19cb4aeb7ea5c}{check\-\_\-resets} (bool $\ast$who\-\_\-reset)}\label{classLifNetSim_a7a3e379a13b36caa6de19cb4aeb7ea5c}
+
+\begin{DoxyCompactList}\small\item\em 1 -\/$>$ 0 and send pulses from resetting oscillators, \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a488066378c2438a315032b3152d158a9}{\hyperlink{classLifNetSim_a488066378c2438a315032b3152d158a9}{Lif\-Net\-Sim} (std\-::vector$<$ double $>$ volts, std\-::vector$<$ double $>$ pulses, std\-::vector$<$ double $>$ \hyperlink{classLifNetSim_a4281a22581bec2e098e0b9f81ac3e6c7}{deltas}, double \hyperlink{classLifNetSim_aa4075d2e5e5432a5e058c4fd7997bbea}{noise\-\_\-rate}=0, double \hyperlink{classLifNetSim_a4fd0ebbe8a95e62430b3054ffe564662}{ext\-\_\-psp}=0)}\label{classLifNetSim_a488066378c2438a315032b3152d158a9}
+
+\begin{DoxyCompactList}\small\item\em Create new simulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classLifNetSim_a05c9e5c69660c8d80423b2a843e2f869}{data\-\_\-transf\-::\-Data\-\_\-dump \hyperlink{classLifNetSim_a05c9e5c69660c8d80423b2a843e2f869}{data\-\_\-to\-\_\-save}}\label{classLifNetSim_a05c9e5c69660c8d80423b2a843e2f869}
+
+\begin{DoxyCompactList}\small\item\em Google protobuf data container. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_ad80cd17aede68f6b2aeecf69081b896e}{std\-::vector\\*
+$<$ data\-\_\-transf\-::\-Oscillator $\ast$ $>$ \hyperlink{classLifNetSim_ad80cd17aede68f6b2aeecf69081b896e}{osc\-\_\-to\-\_\-save}}\label{classLifNetSim_ad80cd17aede68f6b2aeecf69081b896e}
+
+\begin{DoxyCompactList}\small\item\em Each Oscillator variable contains reset timings for one oscillator. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a8e0213fdcfc7e39f0023ffeb3fd28972}{unsigned int \hyperlink{classLifNetSim_a8e0213fdcfc7e39f0023ffeb3fd28972}{n\-\_\-osc}}\label{classLifNetSim_a8e0213fdcfc7e39f0023ffeb3fd28972}
+
+\begin{DoxyCompactList}\small\item\em Number of oscillators in network. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_ae6b47993dd6f170acc7f82dab515f21a}{std\-::vector$<$ double $>$ \hyperlink{classLifNetSim_ae6b47993dd6f170acc7f82dab515f21a}{osc\-\_\-volts}}\label{classLifNetSim_ae6b47993dd6f170acc7f82dab515f21a}
+
+\begin{DoxyCompactList}\small\item\em Voltages of oscillators. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a86d9cd7c257b717e29606801577153ec}{std\-::vector$<$ std\-::deque$<$ double $>$ $>$ \hyperlink{classLifNetSim_a86d9cd7c257b717e29606801577153ec}{net\-\_\-pulses}}\label{classLifNetSim_a86d9cd7c257b717e29606801577153ec}
+
+\begin{DoxyCompactList}\small\item\em Network pulses timings for each oscillaor. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a1d9510b253810e9520362cf1de3df153}{std\-::vector$<$ double $>$ \hyperlink{classLifNetSim_a1d9510b253810e9520362cf1de3df153}{ext\-\_\-pulses}}\label{classLifNetSim_a1d9510b253810e9520362cf1de3df153}
+
+\begin{DoxyCompactList}\small\item\em Pulses from the outside to be applied to each oscillator (noise) \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a4281a22581bec2e098e0b9f81ac3e6c7}{std\-::vector$<$ double $>$ \hyperlink{classLifNetSim_a4281a22581bec2e098e0b9f81ac3e6c7}{deltas}}\label{classLifNetSim_a4281a22581bec2e098e0b9f81ac3e6c7}
+
+\begin{DoxyCompactList}\small\item\em Delta current for each oscillator. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_acab972029d8f56327aa925db344feae6}{const double \hyperlink{classLifNetSim_acab972029d8f56327aa925db344feae6}{I} = 1.\-04}\label{classLifNetSim_acab972029d8f56327aa925db344feae6}
+
+\begin{DoxyCompactList}\small\item\em Input current. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_abc773998c942f9eff71eb4a048ea8902}{const double \hyperlink{classLifNetSim_abc773998c942f9eff71eb4a048ea8902}{gamma} = 1}\label{classLifNetSim_abc773998c942f9eff71eb4a048ea8902}
+
+\begin{DoxyCompactList}\small\item\em Dissipative factor. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a2c7ce3fdae67e8ba8d07990fa61e951c}{const double \hyperlink{classLifNetSim_a2c7ce3fdae67e8ba8d07990fa61e951c}{tau} = 1}\label{classLifNetSim_a2c7ce3fdae67e8ba8d07990fa61e951c}
+
+\begin{DoxyCompactList}\small\item\em Membrane constant. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_ac81b717626bcdfe86f5b80091f9fcf75}{const double \hyperlink{classLifNetSim_ac81b717626bcdfe86f5b80091f9fcf75}{net\-\_\-psp} = 0.\-025}\label{classLifNetSim_ac81b717626bcdfe86f5b80091f9fcf75}
+
+\begin{DoxyCompactList}\small\item\em Post-\/synaptic potential of pulse. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a423c0059e568c60977e12b9e0bfbb557}{const double \hyperlink{classLifNetSim_a423c0059e568c60977e12b9e0bfbb557}{pdelay} = 0.\-49}\label{classLifNetSim_a423c0059e568c60977e12b9e0bfbb557}
+
+\begin{DoxyCompactList}\small\item\em Phase delay of pulses. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a96b99bdbae7fbcc0b096074140cd2586}{const double \hyperlink{classLifNetSim_a96b99bdbae7fbcc0b096074140cd2586}{tdelay} = \hyperlink{classLifNetSim_a423c0059e568c60977e12b9e0bfbb557}{pdelay} $\ast$ tif(\hyperlink{classLifNetSim_abc773998c942f9eff71eb4a048ea8902}{gamma}, \hyperlink{classLifNetSim_acab972029d8f56327aa925db344feae6}{I}, \hyperlink{classLifNetSim_a2c7ce3fdae67e8ba8d07990fa61e951c}{tau})}\label{classLifNetSim_a96b99bdbae7fbcc0b096074140cd2586}
+
+\begin{DoxyCompactList}\small\item\em Time delay of pulses. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a4fd0ebbe8a95e62430b3054ffe564662}{double \hyperlink{classLifNetSim_a4fd0ebbe8a95e62430b3054ffe564662}{ext\-\_\-psp} = 0}\label{classLifNetSim_a4fd0ebbe8a95e62430b3054ffe564662}
+
+\begin{DoxyCompactList}\small\item\em Post-\/synaptic potential of external pulses (noise) \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_aa4075d2e5e5432a5e058c4fd7997bbea}{double \hyperlink{classLifNetSim_aa4075d2e5e5432a5e058c4fd7997bbea}{noise\-\_\-rate} = 0}\label{classLifNetSim_aa4075d2e5e5432a5e058c4fd7997bbea}
+
+\begin{DoxyCompactList}\small\item\em Rate of noise. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_ab154eca0f462efb88f46923ca2c58384}{bool $\ast$ {\bfseries who\-\_\-received}}\label{classLifNetSim_ab154eca0f462efb88f46923ca2c58384}
+
+\item 
+\hypertarget{classLifNetSim_a0ea021e69a7359048121da44a3425b29}{bool $\ast$ {\bfseries who\-\_\-reset}}\label{classLifNetSim_a0ea021e69a7359048121da44a3425b29}
+
+\item 
+\hypertarget{classLifNetSim_ac09a65f24be8b916f839233f6f51669b}{char $\ast$ {\bfseries saddle}}\label{classLifNetSim_ac09a65f24be8b916f839233f6f51669b}
+
+\item 
+int \hyperlink{classLifNetSim_a12ecd775ae43cbb8747dc5c854736b36}{s\-\_\-\-D\-F\-A} \mbox{[}5\mbox{]}\mbox{[}3\mbox{]}
+\item 
+\hypertarget{classLifNetSim_a55c2c0050246f1c6e41af78d51939b41}{int \hyperlink{classLifNetSim_a55c2c0050246f1c6e41af78d51939b41}{s\-\_\-\-D\-F\-A\-\_\-curr\-\_\-state} = 0}\label{classLifNetSim_a55c2c0050246f1c6e41af78d51939b41}
+
+\begin{DoxyCompactList}\small\item\em current state of D\-F\-A \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_aa6babed0405eb1f813a266a08971f2ef}{int \hyperlink{classLifNetSim_aa6babed0405eb1f813a266a08971f2ef}{s\-\_\-\-D\-F\-A\-\_\-accept} = 4}\label{classLifNetSim_aa6babed0405eb1f813a266a08971f2ef}
+
+\begin{DoxyCompactList}\small\item\em accept state of D\-F\-A \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a4c8044a60dc01980d6b19832a78877b8}{std\-::vector$<$ std\-::vector\\*
+$<$ double $>$ $>$ \hyperlink{classLifNetSim_a4c8044a60dc01980d6b19832a78877b8}{net\-\_\-conn\-\_\-mat}}\label{classLifNetSim_a4c8044a60dc01980d6b19832a78877b8}
+
+\begin{DoxyCompactList}\small\item\em Network connection matrix. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_ad15c00b9f8bc10a86ffc73bcbfdcbbb4}{double \hyperlink{classLifNetSim_ad15c00b9f8bc10a86ffc73bcbfdcbbb4}{t\-\_\-to\-\_\-next\-\_\-event} = double(I\-N\-F\-I\-N\-I\-T\-Y)}\label{classLifNetSim_ad15c00b9f8bc10a86ffc73bcbfdcbbb4}
+
+\begin{DoxyCompactList}\small\item\em Time to next event. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a5fe7b525f0660517c94f8ed28d5bf50d}{unsigned long \hyperlink{classLifNetSim_a5fe7b525f0660517c94f8ed28d5bf50d}{time\-\_\-units} = 0}\label{classLifNetSim_a5fe7b525f0660517c94f8ed28d5bf50d}
+
+\begin{DoxyCompactList}\small\item\em Time units elapsed since run start. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_aac7ffbe0f159c3b7dfcad41e821984f6}{double \hyperlink{classLifNetSim_aac7ffbe0f159c3b7dfcad41e821984f6}{time\-\_\-subunits} = 0}\label{classLifNetSim_aac7ffbe0f159c3b7dfcad41e821984f6}
+
+\begin{DoxyCompactList}\small\item\em Time subunits since last time unit. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a2bdf758ccdb5273b1bb527457c979f4a}{double \hyperlink{classLifNetSim_a2bdf758ccdb5273b1bb527457c979f4a}{time} = 0}\label{classLifNetSim_a2bdf758ccdb5273b1bb527457c979f4a}
+
+\begin{DoxyCompactList}\small\item\em Simulation time since run start. \end{DoxyCompactList}\item 
+\hypertarget{classLifNetSim_a810a3a633dd3d53de8af374579a9367e}{bool \hyperlink{classLifNetSim_a810a3a633dd3d53de8af374579a9367e}{stop\-\_\-run} = false}\label{classLifNetSim_a810a3a633dd3d53de8af374579a9367e}
+
+\begin{DoxyCompactList}\small\item\em When true, simulation loop breaks. \end{DoxyCompactList}\item 
+unsigned long \hyperlink{classLifNetSim_a2f3f9325c55f056f06f07ebd0244a1c3}{reset\-\_\-counter} = 0
+\item 
+\hypertarget{classLifNetSim_acca6feadac5c19ae605b6571b6b3cd44}{unsigned long \hyperlink{classLifNetSim_acca6feadac5c19ae605b6571b6b3cd44}{saddle\-\_\-counter} = 0}\label{classLifNetSim_acca6feadac5c19ae605b6571b6b3cd44}
+
+\begin{DoxyCompactList}\small\item\em A counter for the number of saddle reached since run start. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classLifNetSim_ac98d07dd8f7b70e16ccb9a01abf56b9c}{class {\bfseries boost\-::serialization\-::access}}\label{classLifNetSim_ac98d07dd8f7b70e16ccb9a01abf56b9c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class implementing the network event based simulator. 
+
+more stuff 
+
+\subsection{Member Function Documentation}
+\hypertarget{classLifNetSim_ab865fbba5713c71f09401543fb957d0f}{\index{Lif\-Net\-Sim@{Lif\-Net\-Sim}!run@{run}}
+\index{run@{run}!LifNetSim@{Lif\-Net\-Sim}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}void Lif\-Net\-Sim\-::run (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{limit\-\_\-run, }
+\item[{long unsigned}]{limit}
+\end{DoxyParamCaption}
+)}}\label{classLifNetSim_ab865fbba5713c71f09401543fb957d0f}
+
+
+Runs the simulation given a trial\-\_\-time or n\-\_\-resets (not both, error is given). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em trial\-\_\-time} & the total time of the simulation \\
+\hline
+{\em n\-\_\-resets} & the total number of resets for the reference neuron until the simulation is stopped. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classLifNetSim_a53ec98926ef6138230f0e2f5cecba444}{\index{Lif\-Net\-Sim@{Lif\-Net\-Sim}!save\-\_\-reset\-\_\-timing@{save\-\_\-reset\-\_\-timing}}
+\index{save\-\_\-reset\-\_\-timing@{save\-\_\-reset\-\_\-timing}!LifNetSim@{Lif\-Net\-Sim}}
+\subsubsection[{save\-\_\-reset\-\_\-timing}]{\setlength{\rightskip}{0pt plus 5cm}void Lif\-Net\-Sim\-::save\-\_\-reset\-\_\-timing (
+\begin{DoxyParamCaption}
+\item[{int}]{osc}
+\end{DoxyParamCaption}
+)}}\label{classLifNetSim_a53ec98926ef6138230f0e2f5cecba444}
+Save timing of oscillator osc, for later dumping to file via function save\-\_\-data \hypertarget{classLifNetSim_ace0373bc7bd9c4ce2ecb9c8464a32eb6}{\index{Lif\-Net\-Sim@{Lif\-Net\-Sim}!save\-\_\-saddle\-\_\-t\-\_\-and\-\_\-id@{save\-\_\-saddle\-\_\-t\-\_\-and\-\_\-id}}
+\index{save\-\_\-saddle\-\_\-t\-\_\-and\-\_\-id@{save\-\_\-saddle\-\_\-t\-\_\-and\-\_\-id}!LifNetSim@{Lif\-Net\-Sim}}
+\subsubsection[{save\-\_\-saddle\-\_\-t\-\_\-and\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}void Lif\-Net\-Sim\-::save\-\_\-saddle\-\_\-t\-\_\-and\-\_\-id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classLifNetSim_ace0373bc7bd9c4ce2ecb9c8464a32eb6}
+Saves saddle and its timing for later dumping to file via function save\-\_\-data \hypertarget{classLifNetSim_a41b742a3933ce40ff395b8b91a4eac42}{\index{Lif\-Net\-Sim@{Lif\-Net\-Sim}!set\-\_\-init\-\_\-cond@{set\-\_\-init\-\_\-cond}}
+\index{set\-\_\-init\-\_\-cond@{set\-\_\-init\-\_\-cond}!LifNetSim@{Lif\-Net\-Sim}}
+\subsubsection[{set\-\_\-init\-\_\-cond}]{\setlength{\rightskip}{0pt plus 5cm}void Lif\-Net\-Sim\-::set\-\_\-init\-\_\-cond (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ double $>$}]{init\-\_\-volts, }
+\item[{std\-::vector$<$ double $>$}]{pulses, }
+\item[{std\-::vector$<$ double $>$}]{init\-\_\-deltas}
+\end{DoxyParamCaption}
+)}}\label{classLifNetSim_a41b742a3933ce40ff395b8b91a4eac42}
+Used in initialization and when resetting of initial condition is needed \hypertarget{classLifNetSim_a6ec30e0006b7e3cac12299061f86916f}{\index{Lif\-Net\-Sim@{Lif\-Net\-Sim}!set\-\_\-noise@{set\-\_\-noise}}
+\index{set\-\_\-noise@{set\-\_\-noise}!LifNetSim@{Lif\-Net\-Sim}}
+\subsubsection[{set\-\_\-noise}]{\setlength{\rightskip}{0pt plus 5cm}void Lif\-Net\-Sim\-::set\-\_\-noise (
+\begin{DoxyParamCaption}
+\item[{double}]{noise\-\_\-rate, }
+\item[{double}]{noise\-\_\-amplitude\-\_\-squared}
+\end{DoxyParamCaption}
+)}}\label{classLifNetSim_a6ec30e0006b7e3cac12299061f86916f}
+Used in initialization and when setting noise parameters is needed 
+
+\subsection{Member Data Documentation}
+\hypertarget{classLifNetSim_a2f3f9325c55f056f06f07ebd0244a1c3}{\index{Lif\-Net\-Sim@{Lif\-Net\-Sim}!reset\-\_\-counter@{reset\-\_\-counter}}
+\index{reset\-\_\-counter@{reset\-\_\-counter}!LifNetSim@{Lif\-Net\-Sim}}
+\subsubsection[{reset\-\_\-counter}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Lif\-Net\-Sim\-::reset\-\_\-counter = 0}}\label{classLifNetSim_a2f3f9325c55f056f06f07ebd0244a1c3}
+A counter for the number of resets of reference oscillator since run start \hypertarget{classLifNetSim_a12ecd775ae43cbb8747dc5c854736b36}{\index{Lif\-Net\-Sim@{Lif\-Net\-Sim}!s\-\_\-\-D\-F\-A@{s\-\_\-\-D\-F\-A}}
+\index{s\-\_\-\-D\-F\-A@{s\-\_\-\-D\-F\-A}!LifNetSim@{Lif\-Net\-Sim}}
+\subsubsection[{s\-\_\-\-D\-F\-A}]{\setlength{\rightskip}{0pt plus 5cm}int Lif\-Net\-Sim\-::s\-\_\-\-D\-F\-A\mbox{[}5\mbox{]}\mbox{[}3\mbox{]}}}\label{classLifNetSim_a12ecd775ae43cbb8747dc5c854736b36}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+=
+    \{
+      \{0, 1, 0\},
+      \{0, 0, 2\},
+      \{3, 0, 0\},
+      \{0, 0, 4\},
+      \{0, 0, 0\}
+    \}
+\end{DoxyCode}
+D\-F\-A to check saddle is reached states in rows, symbols in columns symbols is the number of oscillators resetting due to a pulse. If D\-F\-A reaches state 4, then a new saddle is reached.
+
+\begin{DoxyVerb}+-----+-----+-----+-----+
+|     |  0  |  1  |  2  |
++-----+-----+-----+-----+
+|  0  |  0  |  1  |  0  |
++-----+-----+-----+-----+
+|  1  |  0  |  0  |  2  |
++-----+-----+-----+-----+
+|  2  |  3  |  0  |  0  |
++-----+-----+-----+-----+
+|  3  |  0  |  0  |  4  |
++-----+-----+-----+-----+
+|  4  |  0  |  0  |  0  |
++-----+-----+-----+-----+
+\end{DoxyVerb}
+
+
+The D\-F\-A reflects the sequence\-:
+\begin{DoxyItemize}
+\item singleton resets because of a pulse
+\item stable cluster resets because of pulse
+\item the new singleton resets naturally
+\item the new stable cluster resets because of pulse (new saddle reached, accept)
+\end{DoxyItemize}
+
+The symbols in the D\-F\-A mean\-: 0\-: one or more natural resets were observed 1\-: a single reset because of pulses was observed 2\-: two resets because of pulses were observed
+
+note that the ambiguity of 0 is not important, as the table of events (see Schittler Neves, Fabio\-: Universal Computation and Memory by Neural Switching, 2010 ) assures that at D\-F\-A state 2, the only natural reset that can be observed is that of the new singleton. So when the symbol 0 is received in state 2, it can only signify that the new singleton fired.
+
+The D\-F\-A transition table is implemented in a bidimensional array. 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/giovanni/\-Dropbox/cpp\-\_\-sims/include/lifnetsim.\-h\end{DoxyCompactItemize}

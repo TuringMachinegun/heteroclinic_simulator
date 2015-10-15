@@ -1,15 +1,15 @@
 package data_transf;
 
-message Data_dump {
-  repeated Oscillator oscillator = 1;
-  repeated Saddle_t_and_id saddle_t_and_id = 2;
+message Data_dump { // complete data for a simulation
+  repeated Oscillator oscillator = 1; // each Oscillator field holds a variable number of reset_t
+  repeated Saddle_t_and_id saddle_t_and_id = 2; // each Saddle_t_and_id holds a variable number of saddle_t and saddle_id (always coupled, if both defined)
 }
 
 message Oscillator {
-  repeated double reset_t = 1 [packed=true];
+  repeated double reset_t = 1 [packed=true]; // an array of reset timings
 }
 
 message Saddle_t_and_id {
-  optional string saddle_id = 1;
-  optional double saddle_t = 2;
+  optional string saddle_id = 1; // a string where each character defines the cluster to which the corresponding oscillator belongs
+  optional double saddle_t = 2; // time the saddle has been reached
 }

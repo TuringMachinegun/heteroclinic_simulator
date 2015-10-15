@@ -1,4 +1,4 @@
-#include "lifnetsim.hpp"
+#include "lifnetsim.h"
 #include <iostream>
 #include <fstream>
 #include <boost/program_options.hpp>

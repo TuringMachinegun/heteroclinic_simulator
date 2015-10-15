@@ -1,4 +1,4 @@
-#include "lifnetsim.hpp"
+#include "lifnetsim.h"
 
 #include <math.h>
 #include <limits>
@@ -74,7 +74,7 @@ void LifNetSim::receive_net_pulses(bool *who_received){
 void LifNetSim::update_net_pulses_timings(){
   for(int i=0; i < this->n_osc; i++){
     int deque_size = this->net_pulses[i].size();
-    if(deque_size>0)
+    if(deque_size>0) // if there's at least one pulse
       for(int j = 0; j<deque_size; j++){
         net_pulses[i][j] -= this->t_to_next_event;
       }
@@ -88,10 +88,10 @@ double LifNetSim::generate_ext_pulse_t(){
 void LifNetSim::receive_ext_pulses(){
   double pos_neg[] = {-1, 1};
   for(int i=0; i < this->n_osc; i++){
-    if (this->ext_pulses[i] == 0){
-      int coin = this->ctoss(this->gen);
+    if (this->ext_pulses[i] == 0){ // if a noise pulse is being received
+      int coin = this->ctoss(this->gen); //excitatory or inhibitory? coin toss
       this->osc_volts[i] += this->ext_psp * pos_neg[coin];
-      this->ext_pulses[i] = this->generate_ext_pulse_t();
+      this->ext_pulses[i] = this->generate_ext_pulse_t(); // generate next pulse
     }
   }
 }
@@ -108,6 +108,7 @@ void LifNetSim::save_reset_timing(int osc){
 
 void LifNetSim::save_saddle_t_and_id()
 {
+  // add new saddle_t_and_id protobuf object (defined in .proto file)
   data_transf::Saddle_t_and_id * saddle_t_id = this->data_to_save.add_saddle_t_and_id();
   saddle_t_id->set_saddle_id(this->saddle, this->n_osc);
   saddle_t_id->set_saddle_t(this->time);
@@ -176,38 +177,56 @@ void LifNetSim::check_saddle()
 
 } // check_saddle
 
+void LifNetSim::set_noise(double noise_rate,
+		     double noise_amplitude_squared){
+  this->noise_rate = 2*noise_rate; // because there is a negative and
+				   // a positive source
+  this->ext_psp = sqrt(noise_amplitude_squared);
+  this->exp_dist = std::exponential_distribution<>(this->noise_rate);
+  for(int i = 0; i<this->n_osc; i++)
+    this->ext_pulses[i] = this->exp_dist(gen); // generate first ext pulses
+}
+
+void LifNetSim::set_init_cond(std::vector<double> init_volts,
+			      std::vector<double> pulses,
+			      std::vector<double> init_deltas
+			      ){  
+  this->osc_volts = init_volts;
+  this->deltas = init_deltas;
+  for(int i = 0; i<this->n_osc; i++){
+    this->net_pulses[i].clear();
+    if(pulses[i] != double(INFINITY)) // infinity used as a
+				      // placeholder for no pulses
+      this->net_pulses[i].push_back(pulses[i]);
+  }
+}
 
 LifNetSim::LifNetSim(std::vector<double> init_volts,
 		     std::vector<double> pulses,
 		     std::vector<double> init_deltas,
 		     double noise_rate,
 		     double noise_amplitude_squared
-		     ){  
+		     ){
   this->osc_volts = init_volts;
   this->deltas = init_deltas;
-  /*!< this->noise_rate is just the rate for one of the two generators
-     (positive and negative), so that the passed argument has to be
-     multiplied by two */
-  this->noise_rate = 2*noise_rate;
-  this->ext_psp = sqrt(noise_amplitude_squared);
-  
-  this->exp_dist = std::exponential_distribution<>(this->noise_rate);
-
   this->n_osc = init_volts.size();
   this->net_pulses.resize(this->n_osc);
   this->ext_pulses.assign(this->n_osc, double(INFINITY));
 
+  this->set_noise(noise_rate, noise_amplitude_squared);
+
   this->net_conn_mat.resize(n_osc);
 
-  this->saddle = new char[this->n_osc];
+  this->saddle = new char[this->n_osc + 1];
+  this->saddle[this->n_osc] = '\0';
+  
   this->who_reset = new bool[this->n_osc];
   this->who_received = new bool[this->n_osc];
   
   for(int i = 0; i<this->n_osc; i++){
-    
-    this->net_pulses[i].push_back(pulses[i]);
 
-    this->ext_pulses[i] = this->exp_dist(gen); /*!< generate first ext pulses*/
+    if(pulses[i] != double(INFINITY))
+      this->net_pulses[i].push_back(pulses[i]);
     
     this->net_conn_mat[i].resize(n_osc, this->net_psp);
     this->net_conn_mat[i][i] = 0;
@@ -226,9 +245,14 @@ LifNetSim::LifNetSim(std::vector<double> init_volts,
 
 void LifNetSim::run(std::string run_limit, unsigned long limit){
   this->stop_run = false;
-  this->reset_counter = 0;
   this->time = 0;
+  this->time_units = 0;
+  this->time_subunits = 0;
+  this->reset_counter = 0;
   this->saddle_counter = 0;
+
+  this->s_DFA_curr_state = 0;
+  this->t_to_next_event = double(INFINITY);
 
   /*! 
     This variable is here to make sure that neither one of time_units, 
@@ -241,7 +265,7 @@ void LifNetSim::run(std::string run_limit, unsigned long limit){
   unsigned long time_limit = absolute_limit;
   unsigned long saddles_limit = absolute_limit;
 
-  unsigned long *counterp, *limitp;
+  unsigned long *limitp;
   int print_every_n_units = 100;
   unsigned long old_counter = 0;
 
@@ -251,17 +275,14 @@ void LifNetSim::run(std::string run_limit, unsigned long limit){
   if(run_limit=="resets"){
     resets_limit = limit;
     limitp = &resets_limit;
-    counterp = &this->reset_counter;
   }
   else if (run_limit=="time"){
     time_limit = limit;
     limitp = &time_limit;
-    counterp = &this->time_units;
   }
   else if (run_limit=="saddles"){
     saddles_limit = limit;
     limitp = &saddles_limit;
-    counterp = &this->saddle_counter;
   }
   
   else{
@@ -379,30 +400,31 @@ void LifNetSim::run(std::string run_limit, unsigned long limit){
 
     if (this->osc_volts[0]==0) this->reset_counter++;
 
-    if(*counterp % print_every_n_units == 0 && *counterp != old_counter){
-      std::cout << *counterp << " over " << *limitp << std::endl;
-      old_counter = *counterp;
-    }
-
     if(this->saddle_counter > old_saddle_count){
       old_saddle_count = this->saddle_counter;
       resets_since_last_saddle = 0;
     }
     else if(this->osc_volts[0]==0) resets_since_last_saddle++;
 
-    if(resets_since_last_saddle > 200){
-      std::cerr << "Dynamics most likely broken. Exiting." << std::endl;
-      throw 1;
-    }
+    // if(resets_since_last_saddle > 1000){
+    //   std::cerr << "Dynamics most likely broken. Exiting." << std::endl;
+    //   throw 1;
+    // }
 
       
     /*! time's out! */
-    if (this->reset_counter > resets_limit ||
+    if (this->reset_counter >= resets_limit ||
 	this->time_units > time_limit ||
-	this->saddle_counter > saddles_limit)
+	this->saddle_counter >= saddles_limit)
       this->stop_run = true;
   }
 }
+
+void LifNetSim::save_data(std::string file_name){
+    std::ofstream ofs(file_name);
+    this->data_to_save.SerializeToOstream(&ofs);
+}
+
 
 LifNetSim::~LifNetSim(){
   delete[] saddle;
