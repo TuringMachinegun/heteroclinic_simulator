@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include <deque>
-#include <boost/serialization/vector.hpp>
+//#include <boost/serialization/vector.hpp>
 #include <fstream>
 #include "sim_data_transf.pb.h"
 
@@ -33,7 +33,7 @@ double t_to_reach_v(double start=0.0, double stop=1.0,
  */
 class LifNetSim {
 
-  friend class boost::serialization::access;
+  //friend class boost::serialization::access;
 
   std::random_device rd;
   //! Mersenne twister algorithm
@@ -78,9 +78,9 @@ public:
   //! Rate of noise 
   double noise_rate = 0;
 
-  // TODO These guys should probably not be here.  They don't need to be in
-  // the class, as they are used only during the run, and reset at
-  // each iteration.
+  // TODO These guys should probably not be here.  They don't need to
+  // be in the class, as they are used only during the run, and reset
+  // at each iteration.
   bool *who_received;
   bool *who_reset;
   char *saddle;
