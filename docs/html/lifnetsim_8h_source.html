@@ -25,7 +25,7 @@
    <div id="projectname">EVE-symnet
    &#160;<span id="projectnumber">0.0.1</span>
    </div>
-   <div id="projectbrief">event-based simulator for symmetric network of LIF neurons</div>
+   <div id="projectbrief">event-based simulator for network of LIF neurons</div>
   </td>
  </tr>
  </tbody>
@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;deque&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;boost/serialization/vector.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//#include &lt;boost/serialization/vector.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;sim_data_transf.pb.h&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
@@ -112,7 +112,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classLifNetSim.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="classLifNetSim.html">LifNetSim</a> {</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span>boost::serialization::access;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="comment">//friend class boost::serialization::access;</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  std::random_device rd;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  std::mt19937 gen = std::mt19937(rd());</div>
@@ -139,9 +139,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classLifNetSim.html#a4fd0ebbe8a95e62430b3054ffe564662">   77</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="classLifNetSim.html#a4fd0ebbe8a95e62430b3054ffe564662">ext_psp</a> = 0;</div>
 <div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classLifNetSim.html#aa4075d2e5e5432a5e058c4fd7997bbea">   79</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="classLifNetSim.html#aa4075d2e5e5432a5e058c4fd7997bbea">noise_rate</a> = 0;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="comment">// TODO These guys should probably not be here.  They don&#39;t need to be in</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="comment">// the class, as they are used only during the run, and reset at</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="comment">// each iteration.</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="comment">// TODO These guys should probably not be here.  They don&#39;t need to</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="comment">// be in the class, as they are used only during the run, and reset</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="comment">// at each iteration.</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordtype">bool</span> *who_received;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordtype">bool</span> *who_reset;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordtype">char</span> *saddle;</div>
@@ -252,7 +252,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 15 2015 13:57:00 for EVE-symnet by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 16 2015 18:12:35 for EVE-symnet by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

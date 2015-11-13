@@ -6,9 +6,9 @@ PBDIR := pb
 PBSRCDIR := $(PBDIR)/src
 PBBUILDDIR := $(PBDIR)/build
 PBPROTOEXT := proto
-PBPROTOCOLS := $(shell find $(PBSRCDIR) -type f -name *.$(PBPROTOEXT))
+PBPROTOCOLS := $(shell find $(PBDIR) -type f -name *.$(PBPROTOEXT))
 PBSRCEXT := pb.cc
-PBOBJECTS := $(patsubst $(PBSRCDIR)/%, $(PBBUILDDIR)/%, $(PBPROTOCOLS:.$(PBPROTOEXT)=.pb.o))
+PBOBJECTS := $(patsubst $(PBDIR)/%, $(PBBUILDDIR)/%, $(PBPROTOCOLS:.$(PBPROTOEXT)=.pb.o))
 
 # event based simulator variables
 SRCDIR := src
@@ -36,7 +36,7 @@ PWINC := -Iinclude -I /usr/local/include/google/protobuf -I$(PBSRCDIR) -I/usr/in
 PWLIB := -lprotobuf
 
 # command line interface variables
-CLTARGET := bin/sim_executable
+CLTARGET := bin/cl_sim
 CLLIB := -lprotobuf -lboost_program_options
 CLINC := -Iinclude -I/usr/local/include/google/protobuf -I$(PBSRCDIR) -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu
 
@@ -46,8 +46,9 @@ $(PBBUILDDIR)/%.pb.o : $(PBSRCDIR)/%.$(PBSRCEXT)
 	@mkdir -p $(PBBUILDDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(PBSRCDIR)/%.$(PBSRCEXT) : $(PBSRCDIR)/%.$(PBPROTOEXT)
-	protoc --cpp_out=$(PBSRCDIR) $<
+$(PBSRCDIR)/%.$(PBSRCEXT) : $(PBDIR)/%.$(PBPROTOEXT)
+	@mkdir -p $(PBSRCDIR)
+	protoc --proto_path=$(PBDIR) --cpp_out=pb/src $<
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
@@ -75,7 +76,7 @@ clean_pw:
 
 clean_pb:
 	@echo "Cleaning protobuf files..."
-	$(RM) -r $(PBBUILDDIR)
+	$(RM) -r $(PBBUILDDIR) $(PBSRCDIR)
 
 clean_sim :
 	@echo "Cleaning simulator files..."

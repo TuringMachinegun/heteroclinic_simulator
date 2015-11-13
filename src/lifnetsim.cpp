@@ -251,7 +251,7 @@ void LifNetSim::run(std::string run_limit, unsigned long limit){
   this->reset_counter = 0;
   this->saddle_counter = 0;
 
-  this->s_DFA_curr_state = 0;
+  this->s_DFA_curr_state = 0; // reinit defaults to true
   this->t_to_next_event = double(INFINITY);
 
   /*! 
@@ -406,10 +406,10 @@ void LifNetSim::run(std::string run_limit, unsigned long limit){
     }
     else if(this->osc_volts[0]==0) resets_since_last_saddle++;
 
-    // if(resets_since_last_saddle > 1000){
-    //   std::cerr << "Dynamics most likely broken. Exiting." << std::endl;
-    //   throw 1;
-    // }
+    if(resets_since_last_saddle > 1000){
+       std::cerr << "Dynamics most likely broken. Exiting." << std::endl;
+       throw 1;
+    }
 
       
     /*! time's out! */
@@ -423,6 +423,9 @@ void LifNetSim::run(std::string run_limit, unsigned long limit){
 void LifNetSim::save_data(std::string file_name){
     std::ofstream ofs(file_name);
     this->data_to_save.SerializeToOstream(&ofs);
+    this->data_to_save.clear_saddle_t_and_id();
+    for (int i=0; i<this->n_osc; i++)
+      this->osc_to_save[i]->clear_reset_t();
 }
 
 
