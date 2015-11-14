@@ -17,7 +17,7 @@ $(BUILDDIR)/%.pb.o : $(SRCDIR)/%.$(SRCEXT)
 
 $(SRCDIR)/%.$(SRCEXT) : $(PROTODIR)/%.proto
 	@mkdir -p $(SRCDIR)
-	protoc --cpp_out=$(SRCDIR) --python_out=$(SRCDIR) $<
+	protoc --proto_path=$(PROTODIR) --cpp_out=$(SRCDIR) --python_out=$(SRCDIR) $<
 
 .PHONY: clean
 
