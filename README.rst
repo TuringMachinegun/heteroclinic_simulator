@@ -1,9 +1,29 @@
 =============
-Requirements:
+Requirements
 =============
 
 Command line interface requires boost program-options
+Python interface requires Python 2.7, the Python 2.7 headers, and swig
+Both interfaces require Google Protocol Buffer 2.6.1, gcc and g++ compilers.
 
-Python wrapper requires Python 2.7, Numpy 1.8.2
+=========
+Compiling
+=========
 
-Both interface require Google Protocol Buffer 2.6.1
+To compile the command line interface, run: make cmline_interface
+To compile the python interface, run: make python_interface
+To compile both, run: make
+
+The files produced by the simulator are binary files in the protocol buffer 2.6.1 format specified in pb/sim_data_transf.proto. To access the data, you'll need to use the files in pb/src if you're planning on using c++ to do so.
+Otherwise, you can use a python interface.
+With protoc installed, run make in the /pb folder. You'll find the python interface in the /src folder. You can just copy that to the root of the script you want to use to analyze the simulator data.
+
+====
+Use
+====
+
+To use the command line interface, you'll first need to compile it. An executable will be produced in the /bin folder. If you need to, you can move it wherever you need it.
+
+To use the python interface, compile it first. A .py file and a .so file will be produced in the python_wrapper/bin folder. You need both files to use the python interface. To use it in your python scripts, just import lifnetsim normally. Note that I didn't yet write an installer for this (or for the command line executable), so you'll need to either add the folder where these two files reside to your PYTHONPATH, or do so dynamically in your python script, or move them to your PYTHONPATH yourself, or just copy the two files to the root of your python script.
+
+

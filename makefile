@@ -1,4 +1,5 @@
-CC := g++
+GXX := g++
+CC := gcc
 CFLAGS := -g -O2 -std=c++11 -fPIC  # both fPIC and c++11 standard are needed (expect errors if removed)
 
 # protocol buffer variables
@@ -8,6 +9,7 @@ PBBUILDDIR := $(PBDIR)/build
 PBPROTOEXT := proto
 PBPROTOCOLS := $(shell find $(PBDIR) -type f -name *.$(PBPROTOEXT))
 PBSRCEXT := pb.cc
+PBSOURCES := $(patsubst $(PBDIR)/%, $(PBSRCDIR)/%, $(PBPROTOCOLS:.$(PBPROTOEXT)=.$(PBSRCEXT)))
 PBOBJECTS := $(patsubst $(PBDIR)/%, $(PBBUILDDIR)/%, $(PBPROTOCOLS:.$(PBPROTOEXT)=.pb.o))
 
 # event based simulator variables
@@ -37,14 +39,14 @@ PWLIB := -lprotobuf
 
 # command line interface variables
 CLTARGET := bin/cl_sim
-CLLIB := -lprotobuf -lboost_program_options
-CLINC := -Iinclude -I/usr/local/include/google/protobuf -I$(PBSRCDIR) -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu
+CLLIB := -L/usr/local/lib -L/usr/lib/x86_64-linux-gnu -lprotobuf -lboost_program_options
+CLINC := -Iinclude -I/usr/local/include/google/protobuf -I$(PBSRCDIR)
 
 all: $(PBOBJECTS) $(PWTARGET) $(CLTARGET)
 
 $(PBBUILDDIR)/%.pb.o : $(PBSRCDIR)/%.$(PBSRCEXT)
 	@mkdir -p $(PBBUILDDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(GXX) $(CFLAGS) -c $< -o $@
 
 $(PBSRCDIR)/%.$(PBSRCEXT) : $(PBDIR)/%.$(PBPROTOEXT)
 	@mkdir -p $(PBSRCDIR)
@@ -52,7 +54,7 @@ $(PBSRCDIR)/%.$(PBSRCEXT) : $(PBDIR)/%.$(PBPROTOEXT)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
-	$(CC) $(CFLAGS) $(CLINC) -c -o $@ $<
+	$(GXX) $(CFLAGS) $(CLINC) -c -o $@ $<
 	@echo $^
 
 python_interface: $(PWTARGET)
@@ -61,22 +63,24 @@ $(PWTARGET): $(SIMLIBOBJ) $(PBOBJECTS)
 	@echo "Making python wrapper...";
 	@mkdir -p $(PWBUILDDIR) $(PWSRCDIR) $(PWTARGETDIR)
 	swig $(SFLAGS) -outdir $(PWTARGETDIR) -o $(PWSOURCE) $(PWIFILE)
-	gcc $(CFLAGS) $(ALL_CFLAGS) -c $(PWSOURCE) -o $(PWTEMPOBJ) $(PWINC)
-	g++ -shared $(SIMLIBOBJ) $(PBOBJECTS) $(PWTEMPOBJ) $(PWINC) -o $(PWTARGET) $(PWLIB)
+	$(CC) $(CFLAGS) $(ALL_CFLAGS) -c $(PWSOURCE) -o $(PWTEMPOBJ) $(PWINC)
+	$(GXX) -shared $(SIMLIBOBJ) $(PBOBJECTS) $(PWTEMPOBJ) $(PWINC) -o $(PWTARGET) $(PWLIB)
 
 cmline_interface: $(CLTARGET)
 
 $(CLTARGET): $(PBOBJECTS) $(OBJECTS)
 	@echo " Linking..."
-	$(CC) $^ -o $(CLTARGET) $(CLLIB)
+	$(GXX) $^ -o $(CLTARGET) $(CLLIB)
+
+.SECONDARY: $(PBSOURCES)
 
 clean_pw:
 	@echo "Cleaning python wrapper files..."
-	$(RM) -r $(PWBUILDDIR) $(PWTARGETDIR) $(PWSRCDIR)
+	$(RM) -r $(PWBUILDDIR) $(PWTARGETDIR)
 
 clean_pb:
 	@echo "Cleaning protobuf files..."
-	$(RM) -r $(PBBUILDDIR) $(PBSRCDIR)
+	$(RM) -r $(PBBUILDDIR)
 
 clean_sim :
 	@echo "Cleaning simulator files..."
