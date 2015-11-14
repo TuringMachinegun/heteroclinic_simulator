@@ -34,8 +34,8 @@ PWIFILE := $(shell find $(PWDIR) -type f -name '*.i')
 PWTARGETDIR := $(PWDIR)/bin
 PWTARGET := $(PWTARGETDIR)/_$(SIMLIBNAME).so # don't change underscore, wrapper needs it
 
-PWINC := -Iinclude -I /usr/local/include/google/protobuf -I$(PBSRCDIR) -I/usr/include/python2.7 
-PWLIB := -lprotobuf
+PWINC := -Iinclude -I/usr/local/include/google/protobuf -I$(PBSRCDIR) -I/usr/include/python2.7 
+PWLIB := -L/usr/local/lib -lprotobuf
 
 # command line interface variables
 CLTARGET := bin/cl_sim
