@@ -1,22 +1,24 @@
 * Requirements
 
-Command line interface requires boost program-options
-Python interface requires Python 2.7, the Python 2.7 headers, and swig
-Both interfaces require Google Protocol Buffer 2.6.1, gcc and g++ compilers.
+- Command line interface requires boost program-options.
+- Python interface requires Python 2.7, the Python 2.7 headers, and
+  swig.
+- Both interfaces require Google Protocol Buffer 2.6.1, gcc and g++
+  compilers.
 
 * Compiling
 
-To compile the command line interface, run: make cmline_interface
-To compile the python interface, run: make python_interface
-To compile both, run: make
-
-The files produced by the simulator are binary files in the protocol
-buffer 2.6.1 format specified in pb/sim_data_transf.proto. To access
-the data, you'll need to use the files in pb/src if you're planning on
-using c++ to do so.  Otherwise, you can use a python interface.  With
-protoc installed, run make in the /pb folder. You'll find the python
-interface in the /src folder. You can just copy that to the root of
-the script you want to use to analyze the simulator data.
+- command line interface :: To compile the command line interface, run: make cmline_interface.
+- python interface :: To compile the python interface, run: make python_interface.
+- both :: To compile both, run: make.
+- protobuf files :: The files produced by the simulator are binary
+     files in the protocolbuffer 2.6.1 format specified in
+     pb/sim_data_transf.proto. To access the data, you'll need to use
+     the files in pb/src if you're planning on using c++ to do so.
+     Otherwise, you can use a python interface.  With protoc
+     installed, run make in the /pb folder. You'll find the python
+     interface in the /src folder. You can just copy that to the root
+     of the script you want to use to analyze the simulator data.
 
 
 * Use
